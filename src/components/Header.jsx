@@ -61,10 +61,10 @@ export default function Header({ theme, toggleTheme }) {
             <ul className="nav-list">
               <li><a className="nav-link" href="#home">Home</a></li>
               <li><a className="nav-link" href="#about">About</a></li>
-              <li><a className="nav-link" href="#experience">Experience</a></li>
+              <li><a className="nav-link" href="#education">Journey</a></li>
               <li><a className="nav-link" href="#skills">Skills</a></li>
+              <li><a className="nav-link" href="#competitive">Coding Profile</a></li>
               <li><a className="nav-link" href="#projects">Projects</a></li>
-              <li><a className="nav-link" href="#education">Education</a></li>
               <li><a className="nav-link" href="#certificates">Certificates</a></li>
               <li><a className="nav-link" href="#contact">Contact</a></li>
             </ul>

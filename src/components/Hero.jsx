@@ -1,4 +1,40 @@
+import { useState, useEffect } from 'react';
+
+const RESUME_PATH = '/resume.pdf';
+const PROFILE_IMG = '/profile.png';
+
+// Loads PDF via fetch → blob to bypass IDM interception
+function ResumeViewer() {
+  const [blobUrl, setBlobUrl] = useState(null);
+
+  useEffect(() => {
+    fetch(RESUME_PATH)
+      .then(r => r.blob())
+      .then(blob => {
+        const url = URL.createObjectURL(blob);
+        setBlobUrl(url);
+      });
+    return () => { if (blobUrl) URL.revokeObjectURL(blobUrl); };
+  }, []);
+
+  if (!blobUrl) {
+    return (
+      <div className="resume-embed" style={{ display: 'grid', placeItems: 'center' }}>
+        <p className="muted">Loading resume…</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="resume-embed">
+      <iframe src={blobUrl} title="Resume" width="100%" height="100%" style={{ border: 'none' }} />
+    </div>
+  );
+}
+
 export default function Hero() {
+  const [showResume, setShowResume] = useState(false);
+
   const stats = [
     { value: "3+", label: "Projects" },
     { value: "17+", label: "Skills" },
@@ -40,9 +76,9 @@ export default function Hero() {
               View Projects<span className="btn-arrow" aria-hidden="true">→</span>
             </a>
             <a className="button" href="#contact">Contact Me</a>
-            <a className="button ghost" href="https://drive.google.com/file/d/YOUR_RESUME_LINK/view" target="_blank" rel="noreferrer">
+            <button className="button ghost" type="button" onClick={() => setShowResume(true)}>
               📄 Resume
-            </a>
+            </button>
           </div>
 
           <div className="social-row">
@@ -61,13 +97,41 @@ export default function Hero() {
         </div>
 
         <div className="hero-right" data-reveal="true">
-          <div className="avatar-ring" aria-hidden="true"></div>
-          <div className="avatar-wrap">
-            <img className="avatar-img" src="./assets/profile.png" alt="Avneet Kumar" />
+          <div className="avatar-card">
+            <img className="avatar-img" src={PROFILE_IMG} alt="Avneet Kumar" />
+            <div className="status-dot" aria-hidden="true"></div>
           </div>
-          <div className="status-dot" aria-hidden="true"></div>
         </div>
       </div>
+
+      {/* Resume Viewer Modal */}
+      {showResume && (
+        <div className="modal-overlay" onClick={() => setShowResume(false)} role="dialog" aria-modal="true" aria-label="Resume viewer">
+          <div className="resume-modal" onClick={e => e.stopPropagation()}>
+            <div className="resume-modal-header">
+              <h3>📄 Resume — Avneet Kumar</h3>
+              <div className="resume-modal-actions">
+                <button className="button small primary" type="button" onClick={() => {
+                  fetch(RESUME_PATH)
+                    .then(r => r.blob())
+                    .then(blob => {
+                      const url = URL.createObjectURL(blob);
+                      const a = document.createElement('a');
+                      a.href = url;
+                      a.download = 'Avneet_Kumar_Resume.pdf';
+                      a.click();
+                      URL.revokeObjectURL(url);
+                    });
+                }}>
+                  ⬇ Download
+                </button>
+                <button className="modal-close" type="button" onClick={() => setShowResume(false)} aria-label="Close">✕</button>
+              </div>
+            </div>
+            <ResumeViewer />
+          </div>
+        </div>
+      )}
     </section>
   );
 }
