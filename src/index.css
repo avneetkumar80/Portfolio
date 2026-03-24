@@ -1336,6 +1336,39 @@ h3 { margin: 0; }
 .form-input::placeholder { color: var(--muted); }
 .form-textarea { resize: vertical; min-height: 100px; }
 
+.form-status {
+  margin-top: 12px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  animation: fade-in 300ms ease;
+}
+
+.form-status.success {
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  color: var(--accent);
+}
+
+.form-status.error {
+  background: rgba(251, 113, 133, 0.1);
+  border: 1px solid rgba(251, 113, 133, 0.25);
+  color: var(--danger);
+}
+
+.form-status.activate {
+  background: rgba(251, 191, 36, 0.1);
+  border: 1px solid rgba(251, 191, 36, 0.25);
+  color: #fbbf24;
+}
+
+.contact-form .button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+
 /* ---- Footer ---- */
 .site-footer { margin-top: 40px; }
 
