@@ -936,6 +936,61 @@ html[data-theme="light"] .muted {
   border-color: rgba(251, 113, 133, 0.3);
 }
 
+.recent-questions {
+  margin-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 14px;
+}
+
+.recent-questions-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: rgba(229, 231, 235, 0.82);
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.live-indicator {
+  color: #4ade80;
+  font-size: 10px;
+}
+
+.recent-question-list {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+}
+
+.recent-question-list li {
+  min-width: 0;
+}
+
+.recent-question-list a {
+  display: block;
+  overflow: hidden;
+  color: rgba(229, 231, 235, 0.9);
+  font-size: 13px;
+  line-height: 1.35;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.recent-question-list a:hover {
+  color: #22d3ee;
+}
+
+.recent-questions-status {
+  margin: 10px 0 0;
+  color: rgba(229, 231, 235, 0.6);
+  font-size: 12px;
+}
+
 .comp-actions {
   margin-top: 14px;
   display: flex;
